@@ -8,6 +8,7 @@ Created on 22 feb 2022
 #de los sistemas informáticos críticos y las aplicaciones de la organización y dar cuenta
 #mensualmente
 import hashlib
+from msilib.schema import Directory
 import os
 import time
 import datetime
@@ -25,6 +26,7 @@ import smtplib
 from pathlib import Path
 from pick import pick
 import webbrowser
+import re
 
     
 logo = """
@@ -51,7 +53,7 @@ newFilesAndHashes = dict()
 badIntegrity = list()
 graphDate = list()
 cantidadDeArchivos = [0, 1000]
-now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+now = datetime.datetime.now().strftime("%Y-%m-\d %H:%M:%S")
 interval = 0
 running = bool()
 window = tk.Tk()
@@ -214,7 +216,7 @@ def run():
 def importarConfigYHashes():        
     filename = "log.log"
     logging.basicConfig(format='%(levelname)s:%(asctime)s: %(message)s',
-                            datefmt='%d/%m/%Y %H:%M:%S', filename=filename, level=logging.INFO)
+                            datefmt='\d/%m/%Y %H:%M:%S', filename=filename, level=logging.INFO)
     importConfig()
     crearHashes()
     
@@ -278,11 +280,56 @@ def menu():
     
     menu()
 
+def guardar(fichero):
+    log_start = "^\w+:\d\d\/\d\d\/\d\d\d\d \d\d:\d\d:\d\d: "
+    ok_check_text = "Comprobacion realizada con exito en: "
+    ok_files_text = "Numero de archivos OK: "
+    changed_check_text = "Archivos con integridad comprometida: "
+    changed_files_text = "Numero de archivos MODIFICADOS: "
+    dir = "DIR: "
+
+
+    with open(fichero, "r") as log:
+        #ok_files = re.findall(log_start + ok_files_text + "\d+$", log)
+        #ok_files = re.findall(pattern="^\w+:\d+\/\d+\/\d+ \d+:\d+:\d+: Numero de archivos OK: \d$", string=log)
+        #print(ok_files)
+        #changed_files = re.findall(log_start + changed_files_text + "\d$")
+        #changed_check = re.findall(log_start + changed_check_text)
+        lista_ok = []
+        lista_failed = []
+        lista_dir = []
+        for linea in log:
+            if ok_files_text in linea or changed_files_text in linea:
+                split = linea.split(":")
+                tipo_log = split[0]
+                fecha = split[1].split(" ")[0]
+                horas = split[1].split(" ")[1]
+                minutos = split[2]
+                segundos = split[3]
+                mensaje = split[4][1:]
+                numero = int(split[5][1:-1])
+                if ok_files_text in linea:
+                    lista_ok.append(numero)
+                    
+                else:
+                    lista_failed.append(numero)
+            elif changed_files_text in linea:
+                pass
+            elif dir in linea:
+                split = linea.split(dir)
+                lista_dir.append(split[1])
+
+        print(lista_ok)
+        print(lista_failed)
+
+            
+
+
 '''def iniciar():
     
     filename = "log.log"
     logging.basicConfig(format='%(levelname)s:%(asctime)s: %(message)s',
-                        datefmt='%d/%m/%Y %H:%M:%S', filename=filename, level=logging.INFO)
+                        datefmt='\d/%m/%Y %H:%M:%S', filename=filename, level=logging.INFO)
     importConfig()
     #Una vez importada la configuración debemos calcular los hashes de los docs:
     global configDict
@@ -297,6 +344,7 @@ def menu():
 
 
 if __name__ == "__main__":
-    menu()
+    guardar("log.log")
+    #menu()
     #iniciar()
     #print(os.path.abspath('.').split(os.path.sep)[0]+os.path.sep+"top_secret\log.log")
