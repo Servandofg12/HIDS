@@ -363,7 +363,7 @@ def iniciar():
     filename = os.path.abspath('.').split(os.path.sep)[
         0]+os.path.sep+"top_secret\log.log"
     logging.basicConfig(format='%(levelname)s:%(asctime)s: %(message)s',
-                        datefmt='%m/%d/%Y %H:%M:%S', filename=filename, level=logging.INFO)
+                        datefmt='%d/%m/%Y %H:%M:%S', filename=filename, level=logging.INFO)
     importConfig()
     gui()
 
