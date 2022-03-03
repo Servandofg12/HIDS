@@ -23,7 +23,43 @@ from tkinter.scrolledtext import ScrolledText
 from win10toast import ToastNotifier
 import smtplib
 from pathlib import Path
+import keyboard
+from pick import pick
 
+    
+logo = """
+   █████   █████ █████ ██████████    █████████ 
+░░███   ░░███ ░░███ ░░███░░░░███  ███░░░░░███
+ ░███    ░███  ░███  ░███   ░░███░███    ░░░ 
+ ░███████████  ░███  ░███    ░███░░█████████ 
+ ░███░░░░░███  ░███  ░███    ░███ ░░░░░░░░███
+ ░███    ░███  ░███  ░███    ███  ███    ░███
+ █████   █████ █████ ██████████  ░░█████████ 
+░░░░░   ░░░░░ ░░░░░ ░░░░░░░░░░    ░░░░░░░░░  
+                                             
+                                   in Python                   
+                       """
+
+#print(logo)
+def vacio():
+    pass
+
+def menu():
+    title = logo
+    options = ['Inicializar', 'Crear Hashes', 'Empezar Examen', 'Detener Examen', 'Ver Logs']
+    option, index = pick(options, title, indicator='=>', default_index=1)
+    if option == 'Inicializar':
+        vacio()
+    elif option == 'Crear Hashes':
+        vacio()
+    elif option == 'Empezar Examen':
+        vacio()
+    elif option == 'Detener Examen':
+        vacio()
+    elif option == 'Ver Logs':
+        vacio()
+    
+=======
 # GLOBALS
 configDict = dict()
 filesAndHashes = dict()
