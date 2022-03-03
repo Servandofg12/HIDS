@@ -1,3 +1,65 @@
-INFO:01/03/2022 10:16:41: La configuracion se ha importado correctamente!
-INFO:01/03/2022 10:17:14: La configuracion se ha importado correctamente!
-INFO:01/03/2022 10:19:24: La configuracion se ha importado correctamente!
+INFO:03/03/2022 12:18:20: La configuracion se ha importado correctamente!
+INFO:03/03/2022 12:18:20: Se han guardado los hashes en el archivo hashes.hash correctamente!
+INFO:03/03/2022 12:18:20: Hashes exportados correctamente en: 0:00:00.000992
+INFO:03/03/2022 12:18:20: Numero de archivos OK: 3
+INFO:03/03/2022 12:18:20: Numero de archivos MODIFICADOS: 0
+INFO:03/03/2022 12:18:20: Numero de archivos OK: 3
+INFO:03/03/2022 12:18:20: Numero de archivos MODIFICADOS: 0
+INFO:03/03/2022 12:18:20: Comprobacion realizada con exito en: 0:00:00.002963
+INFO:03/03/2022 12:18:20: Comprobacion realizada con exito en: 0:00:00.003048
+INFO:03/03/2022 12:18:28: Numero de archivos OK: 3
+INFO:03/03/2022 12:18:28: Numero de archivos MODIFICADOS: 0
+INFO:03/03/2022 12:18:28: Comprobacion realizada con exito en: 0:00:00.011450
+INFO:03/03/2022 12:18:28: Numero de archivos OK: 3
+INFO:03/03/2022 12:18:28: Numero de archivos MODIFICADOS: 0
+INFO:03/03/2022 12:18:28: Comprobacion realizada con exito en: 0:00:00.007404
+INFO:03/03/2022 12:18:36: Numero de archivos OK: 2
+INFO:03/03/2022 12:18:36: Numero de archivos MODIFICADOS: 1
+WARNING:03/03/2022 12:18:36: Archivos con integridad comprometida: 
+           DIR: C:/Users/Servando/Desktop/Carpeta de Ejemplo/Esto es un ejemplo.txtLos hashes no coinciden!
+INFO:03/03/2022 12:18:36: Comprobacion realizada con exito en: 0:00:00.007450
+INFO:03/03/2022 12:18:36: Numero de archivos OK: 2
+INFO:03/03/2022 12:18:36: Numero de archivos MODIFICADOS: 1
+WARNING:03/03/2022 12:18:36: Archivos con integridad comprometida: 
+           DIR: C:/Users/Servando/Desktop/Carpeta de Ejemplo/Esto es un ejemplo.txtLos hashes no coinciden!
+INFO:03/03/2022 12:18:36: Comprobacion realizada con exito en: 0:00:00.006249
+INFO:03/03/2022 12:18:44: Numero de archivos OK: 2
+INFO:03/03/2022 12:18:44: Numero de archivos MODIFICADOS: 1
+WARNING:03/03/2022 12:18:44: Archivos con integridad comprometida: 
+           DIR: C:/Users/Servando/Desktop/Carpeta de Ejemplo/Esto es un ejemplo.txtLos hashes no coinciden!
+INFO:03/03/2022 12:18:44: Comprobacion realizada con exito en: 0:00:00.007503
+INFO:03/03/2022 12:18:44: Numero de archivos OK: 2
+INFO:03/03/2022 12:18:44: Numero de archivos MODIFICADOS: 1
+WARNING:03/03/2022 12:18:44: Archivos con integridad comprometida: 
+           DIR: C:/Users/Servando/Desktop/Carpeta de Ejemplo/Esto es un ejemplo.txtLos hashes no coinciden!
+INFO:03/03/2022 12:18:44: Comprobacion realizada con exito en: 0:00:00.005021
+INFO:03/03/2022 12:18:52: Numero de archivos OK: 2
+INFO:03/03/2022 12:18:52: Numero de archivos MODIFICADOS: 1
+WARNING:03/03/2022 12:18:52: Archivos con integridad comprometida: 
+           DIR: C:/Users/Servando/Desktop/Carpeta de Ejemplo/Esto es un ejemplo.txtLos hashes no coinciden!
+INFO:03/03/2022 12:18:52: Comprobacion realizada con exito en: 0:00:00.006467
+INFO:03/03/2022 12:18:52: Numero de archivos OK: 2
+INFO:03/03/2022 12:18:52: Numero de archivos MODIFICADOS: 1
+WARNING:03/03/2022 12:18:52: Archivos con integridad comprometida: 
+           DIR: C:/Users/Servando/Desktop/Carpeta de Ejemplo/Esto es un ejemplo.txtLos hashes no coinciden!
+INFO:03/03/2022 12:18:52: Comprobacion realizada con exito en: 0:00:00.005188
+INFO:03/03/2022 12:19:00: Numero de archivos OK: 2
+INFO:03/03/2022 12:19:00: Numero de archivos MODIFICADOS: 1
+WARNING:03/03/2022 12:19:00: Archivos con integridad comprometida: 
+           DIR: C:/Users/Servando/Desktop/Carpeta de Ejemplo/Esto es un ejemplo.txtLos hashes no coinciden!
+INFO:03/03/2022 12:19:00: Comprobacion realizada con exito en: 0:00:00.006901
+INFO:03/03/2022 12:19:00: Numero de archivos OK: 2
+INFO:03/03/2022 12:19:00: Numero de archivos MODIFICADOS: 1
+WARNING:03/03/2022 12:19:00: Archivos con integridad comprometida: 
+           DIR: C:/Users/Servando/Desktop/Carpeta de Ejemplo/Esto es un ejemplo.txtLos hashes no coinciden!
+INFO:03/03/2022 12:19:00: Comprobacion realizada con exito en: 0:00:00.005714
+INFO:03/03/2022 12:19:08: Numero de archivos OK: 2
+INFO:03/03/2022 12:19:08: Numero de archivos OK: 2
+INFO:03/03/2022 12:19:08: Numero de archivos MODIFICADOS: 1
+INFO:03/03/2022 12:19:08: Numero de archivos MODIFICADOS: 1
+WARNING:03/03/2022 12:19:08: Archivos con integridad comprometida: 
+           DIR: C:/Users/Servando/Desktop/Carpeta de Ejemplo/Esto es un ejemplo.txtLos hashes no coinciden!
+WARNING:03/03/2022 12:19:08: Archivos con integridad comprometida: 
+           DIR: C:/Users/Servando/Desktop/Carpeta de Ejemplo/Esto es un ejemplo.txtLos hashes no coinciden!
+INFO:03/03/2022 12:19:08: Comprobacion realizada con exito en: 0:00:00.010476
+INFO:03/03/2022 12:19:08: Comprobacion realizada con exito en: 0:00:00.011017

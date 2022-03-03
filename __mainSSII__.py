@@ -100,6 +100,85 @@ def folderHash(pathName):
     return fileAndHash
 
 
+def exportarHashesADocumento(diccionarioDeHashes):
+    begin_time = datetime.datetime.now()
+    path = "hashes.hash"
+    try:
+        with open(path, "w") as writer:
+            for key, value in diccionarioDeHashes.items():
+                writer.write(key + "=" + value + "\n")
+        logging.info("Se han guardado los hashes en el archivo hashes.hash correctamente!")
+
+    except:
+        logging.error("Error al exportar los hashes al archivo hashes.hash.")
+    
+    end = datetime.datetime.now() - begin_time
+    strr = "Hashes exportados correctamente en: " + str(end)
+    logging.info(strr)
+    
+    
+    
+def compareHashes():
+    """ Params: NONE """
+    """ Return: NONE """
+    """ Compara los dos diccionarios, uno contiene los hashes cargados del archivo hashes.hash y el otro contiene los hashes recien calculados,
+    tras dicha comparacion los resultados saldran por consola """
+    numberOfFilesOK = int()
+    numberOfFilesNoOk = int()
+    listOfNoMatches = list()
+    for key, value in filesAndHashes.items():
+        if newFilesAndHashes[key] == value:
+            numberOfFilesOK += 1
+        else:
+            numberOfFilesNoOk += 1
+            cadena = "DIR: " + str(key) + "Los hashes no coinciden!"
+            listOfNoMatches.append(cadena)
+    badIntegrity.append(numberOfFilesNoOk)
+    #graphDate.append(datetime.datetime.now().strftime("%M"))
+    str1 = "Numero de archivos OK: " + str(numberOfFilesOK)
+    str2 = "Numero de archivos MODIFICADOS: " + str(numberOfFilesNoOk)
+    logging.info(str1)
+    logging.info(str2)
+    if(listOfNoMatches):
+        str3 = "Archivos con integridad comprometida: "
+        noMatchesToPrint = list()
+        for entry in listOfNoMatches:
+            noMatchesToPrint.append("           "+entry)
+        logging.warning(str3 + "\n" + '\n'.join(noMatchesToPrint))
+        toaster.show_toast(
+            "HIDS", "Hay un problema integridad. Revisar LOG.", duration=interval, threaded=True)
+    else:
+        toaster.show_toast(
+            "HIDS", "Examen finalizado. Se mantiene la integridad.", duration=interval, threaded=True)
+
+
+    
+    
+def runHandle():
+    t = Thread(target=run)
+    global running
+    running = True
+    t.start()
+    
+    
+def run():
+    """ Params: NONE """
+    """ Return: NONE """
+    """  """
+    if running == True:
+        begin_time = datetime.datetime.now()
+        pathName = configDict["Directories to protect"]
+        global newFilesAndHashes
+        newFilesAndHashes = folderHash(pathName)
+        compareHashes()
+        interval = configDict["Verify interval"]
+        threading.Timer(float(interval), run).start()
+        end = datetime.datetime.now() - begin_time
+        strr = "Comprobacion realizada con exito en: " + str(end)
+        logging.info(strr)
+    
+
+
 def iniciar():
     
     filename = "log.log"
@@ -108,9 +187,12 @@ def iniciar():
     importConfig()
     #Una vez importada la configuración debemos calcular los hashes de los docs:
     pathName = configDict["Directories to protect"]
-    diccionarioHashes = folderHash(pathName)
-    print(diccionarioHashes)
-    
+    global filesAndHashes
+    filesAndHashes = folderHash(pathName)
+    #print(filesAndHashes)
+    exportarHashesADocumento(filesAndHashes)
+    runHandle()
+    run()
     #gui()
 
 
