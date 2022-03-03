@@ -23,8 +23,8 @@ from tkinter.scrolledtext import ScrolledText
 from win10toast import ToastNotifier
 import smtplib
 from pathlib import Path
-import keyboard
 from pick import pick
+import webbrowser
 
     
 logo = """
@@ -43,23 +43,7 @@ logo = """
 #print(logo)
 def vacio():
     pass
-
-def menu():
-    title = logo
-    options = ['Inicializar', 'Crear Hashes', 'Empezar Examen', 'Detener Examen', 'Ver Logs']
-    option, index = pick(options, title, indicator='=>', default_index=1)
-    if option == 'Inicializar':
-        vacio()
-    elif option == 'Crear Hashes':
-        vacio()
-    elif option == 'Empezar Examen':
-        vacio()
-    elif option == 'Detener Examen':
-        vacio()
-    elif option == 'Ver Logs':
-        vacio()
     
-=======
 # GLOBALS
 configDict = dict()
 filesAndHashes = dict()
@@ -70,6 +54,8 @@ cantidadDeArchivos = [0, 1000]
 now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 interval = 0
 running = bool()
+window = tk.Tk()
+logBox = ScrolledText(window, width=80, height=20)
 toaster = ToastNotifier()
 
 
@@ -189,39 +175,117 @@ def compareHashes():
 
 
     
+
+def guiHandle():
+    t = Thread(target=gui)
+    t.start()
     
 def runHandle():
     t = Thread(target=run)
     global running
     running = True
     t.start()
+    gui()
     
     
 def run():
     """ Params: NONE """
     """ Return: NONE """
     """  """
-    if running == True:
+    if running:
         begin_time = datetime.datetime.now()
         pathName = configDict["Directories to protect"]
         global newFilesAndHashes
         newFilesAndHashes = folderHash(pathName)
         compareHashes()
+        logBox.config(state=tk.NORMAL)
+        logBoxContainer()  # AQUI EL LOG BOX
+        logBox.config(state=tk.DISABLED)
         interval = configDict["Verify interval"]
         threading.Timer(float(interval), run).start()
         end = datetime.datetime.now() - begin_time
         strr = "Comprobacion realizada con exito en: " + str(end)
         logging.info(strr)
+        #gui()
+    else:
+        logging.critical("EXAMEN INTERRUMPIDO")
+        
+
+def importarConfigYHashes():        
+    filename = "log.log"
+    logging.basicConfig(format='%(levelname)s:%(asctime)s: %(message)s',
+                            datefmt='%d/%m/%Y %H:%M:%S', filename=filename, level=logging.INFO)
+    importConfig()
+    crearHashes()
     
+def crearHashes():
+    pathName = configDict["Directories to protect"]
+    global filesAndHashes
+    filesAndHashes = folderHash(pathName)
+    exportarHashesADocumento(filesAndHashes)
+    
+def detenerExamen():
+    toaster.show_toast(
+        "HIDS", "Servicio interrumpido. El sistema NO esta examinando los directorios.", threaded=True)
+    global running
+    running = False
+    run()
+    
+    
+def readLogFile():
+    text = str()
+    if (os.path.exists('log.log')):
+        with open(os.path.join('log.log')) as reader:
+            text = reader.read()
+    else:
+        f = open(os.path.join('log.log'), "x")
+    return text
 
 
-def iniciar():
+def logBoxContainer():
+    logBox.delete("1.0", tk.END)
+    text = readLogFile()
+    logBox.insert(tk.INSERT, text)
+    logBox.insert(tk.END, "")
+    
+def gui():
+    window.resizable(0, 0)
+    window.geometry("512x512")
+    labelLog = tk.Label(window, text="Fichero de LOG")
+    labelLog.pack()
+    window.title("HIDS")
+    logBox.pack()
+    window.mainloop()
+        
+        
+def menu():
+    title = logo
+    options = ['Importar la configuración y hacer primer hasheo de los docs',
+                'Crear Hashes', 'Empezar Examen', 'Detener Examen', 'Ver Logs', 'Cerrar']
+    option, index = pick(options, title, indicator='=>', default_index=0)
+    if index == 0:
+        importarConfigYHashes()
+    elif option == 'Crear Hashes':
+        crearHashes()
+    elif option == 'Empezar Examen':
+        runHandle()
+    elif option == 'Detener Examen':
+        detenerExamen()
+    elif option == 'Ver Logs':
+        webbrowser.open_new("log.log")
+    elif option == 'Cerrar':
+        os.system(quit())
+    
+    menu()
+
+'''def iniciar():
     
     filename = "log.log"
     logging.basicConfig(format='%(levelname)s:%(asctime)s: %(message)s',
                         datefmt='%d/%m/%Y %H:%M:%S', filename=filename, level=logging.INFO)
     importConfig()
     #Una vez importada la configuración debemos calcular los hashes de los docs:
+    global configDict
     pathName = configDict["Directories to protect"]
     global filesAndHashes
     filesAndHashes = folderHash(pathName)
@@ -229,9 +293,10 @@ def iniciar():
     exportarHashesADocumento(filesAndHashes)
     runHandle()
     run()
-    #gui()
+    #gui()'''
 
 
 if __name__ == "__main__":
-    iniciar()
+    menu()
+    #iniciar()
     #print(os.path.abspath('.').split(os.path.sep)[0]+os.path.sep+"top_secret\log.log")
