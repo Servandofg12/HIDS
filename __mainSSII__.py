@@ -25,6 +25,7 @@ import smtplib
 from pathlib import Path
 from pick import pick
 import webbrowser
+import pathlib
 
     
 logo = """
@@ -40,9 +41,6 @@ logo = """
                                    in Python                   
                        """
 
-#print(logo)
-def vacio():
-    pass
     
 # GLOBALS
 configDict = dict()
@@ -59,14 +57,51 @@ logBox = ScrolledText(window, width=80, height=20)
 toaster = ToastNotifier()
 
 
+def generarFicheros():
+    generarFicherosBin()
+    generarFicherosTxt()
+
+def generarFicherosBin():
+    global configDict 
+    path = Path(configDict["Directories to protect"])
+    try:
+        Path(configDict["Directories to protect"]+"\FicherosBIN").mkdir(parents=True)
+    except:
+        pass
+    count = 0
+    for i in range(1, 101):
+        nameFile = "EjemploBin " + str(i) +".bin"
+        path = Path((configDict["Directories to protect"]+"\FicherosBIN") + os.path.sep + nameFile)
+        try:
+            with open(path, "w") as file:
+                file.write("Esto es un ejemplo de fichero bin (" + str(i) + ").")
+        except:
+            logging.info("Se ha producido un error a la hora de crear ficheros. :(")
+        count += 1
+    logging.info("Creados " + str(count) + " ficheros BIN correctamente.")
+
+def generarFicherosTxt():
+    global configDict 
+    path = Path(configDict["Directories to protect"])
+    try:
+        Path(configDict["Directories to protect"]+"\FicherosTXT").mkdir(parents=True)
+    except:
+        pass
+    count = 0
+    for i in range(1, 101):
+        nameFile = "EjemploTxt " + str(i) +".txt"
+        path = Path((configDict["Directories to protect"]+"\FicherosTXT") + os.path.sep + nameFile)
+        try:
+            with open(path, "w") as file:
+                file.write("Esto es un ejemplo de fichero txt (" + str(i) + ").")
+        except:
+            logging.info("Se ha producido un error a la hora de crear ficheros. :(")
+        count += 1
+    logging.info("Creados " + str(count) + " ficheros TXT correctamente.")
+
+
 def importConfig():
-    """ Params: NONE """
-    """ Return: NONE """
-    """ Crea un archivo de configuracion si no lo hay con las opciones de la plantilla de 'configs'
-    y en caso de que ya exista (que sera siempre menos la primera vez que se ejecute el script)
-    carga la configuracion de dicho archivo y la importa al diccionario del script llamado 'configDict',
-    mediante este diccionario vamos a poder manejar dichas opciones indicadas en el archivo de configuracion"""
-    
+     
     path = "config.config"
     if (os.path.exists(path)):
         try:
@@ -95,14 +130,10 @@ def importConfig():
         except:
             logging.error(
                 "Error al crear el archivo de configuracion, problema con los permisos?")
-        importConfig()
+        menu()
         
         
 def folderHash(pathName):
-    """ Params: ruta """
-    """ Return: devuelve un diccionario formato por la ruta y el hash: key=ruta, value=hash """
-    """ Se le pasa una ruta y viaja por todos los archivos y las subrutas de dicha ruta y calcula los hashes
-    de cada uno de los archivos encontrados """
     fileAndHash = dict()
     for root, dirs, files in os.walk(pathName):
         for file in files:
@@ -139,12 +170,7 @@ def exportarHashesADocumento(diccionarioDeHashes):
     logging.info(strr)
     
     
-    
 def compareHashes():
-    """ Params: NONE """
-    """ Return: NONE """
-    """ Compara los dos diccionarios, uno contiene los hashes cargados del archivo hashes.hash y el otro contiene los hashes recien calculados,
-    tras dicha comparacion los resultados saldran por consola """
     numberOfFilesOK = int()
     numberOfFilesNoOk = int()
     listOfNoMatches = list()
@@ -189,9 +215,6 @@ def runHandle():
     
     
 def run():
-    """ Params: NONE """
-    """ Return: NONE """
-    """  """
     if running:
         begin_time = datetime.datetime.now()
         pathName = configDict["Directories to protect"]
@@ -206,7 +229,6 @@ def run():
         end = datetime.datetime.now() - begin_time
         strr = "Comprobacion realizada con exito en: " + str(end)
         logging.info(strr)
-        #gui()
     else:
         logging.critical("EXAMEN INTERRUMPIDO")
         
@@ -260,14 +282,14 @@ def gui():
         
 def menu():
     title = logo
-    options = ['Importar la configuración y hacer primer hasheo de los docs',
-                'Crear Hashes', 'Empezar Examen', 'Detener Examen', 'Ver Logs', 'Cerrar']
+    options = ['Importar configuracion', 'Empezar Examen', 'Detener Examen', 'Ver Logs', 'Cerrar']
     option, index = pick(options, title, indicator='=>', default_index=0)
-    if index == 0:
+    
+    if option == 'Importar configuracion':
         importarConfigYHashes()
-    elif option == 'Crear Hashes':
-        crearHashes()
+        generarFicheros()
     elif option == 'Empezar Examen':
+        importarConfigYHashes()
         runHandle()
     elif option == 'Detener Examen':
         detenerExamen()
@@ -297,6 +319,10 @@ def menu():
 
 
 if __name__ == "__main__":
+    #print(os.path.exists("C:\\Users\Servando\Desktop\Carpeta de Ejemplo"))
+    '''path = "C:\\Users\Servando\Desktop\Carpeta de Ejemplo\Ejemplo 2"
+    with open(path, "w") as file:
+                file.write("Esto es un ejemplo de fichero")'''
     menu()
     #iniciar()
     #print(os.path.abspath('.').split(os.path.sep)[0]+os.path.sep+"top_secret\log.log")
