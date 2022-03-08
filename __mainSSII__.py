@@ -55,6 +55,10 @@ running = bool()
 window = tk.Tk()
 logBox = ScrolledText(window, width=80, height=20)
 toaster = ToastNotifier()
+contadorDeDias = 0
+contadorDeMes = 0
+numberFilesOkMensual = 0
+numberFilesModifiedMensual = 0
 
 
 def generarFicheros():
@@ -118,7 +122,7 @@ def importConfig():
             logging.error("Error al importar la configuracion")
     else:
         configs = ["\nSelected Hash mode=\n",
-                   "Directories to protect=\n", "Verify interval=\n", "email=\n", "smtpPass=\n", "toEmail=\n"]
+                   "Directories to protect=\n", "Verify interval=\n"]
         try:
             with open("config.config", "w") as file:
                 file.write(
@@ -133,7 +137,7 @@ def importConfig():
         menu()
         
         
-def folderHash(pathName):
+def hashearCarpeta(pathName):
     fileAndHash = dict()
     for root, dirs, files in os.walk(pathName):
         for file in files:
@@ -171,6 +175,8 @@ def exportarHashesADocumento(diccionarioDeHashes):
     
     
 def compareHashes():
+    global contadorDeDias
+    contadorDeDias += 1
     numberOfFilesOK = int()
     numberOfFilesNoOk = int()
     listOfNoMatches = list()
@@ -182,7 +188,10 @@ def compareHashes():
             cadena = "DIR: " + str(key) + "Los hashes no coinciden!"
             listOfNoMatches.append(cadena)
     badIntegrity.append(numberOfFilesNoOk)
-    #graphDate.append(datetime.datetime.now().strftime("%M"))
+    global numberFilesOkMensual
+    global numberFilesModifiedMensual
+    numberFilesOkMensual += numberOfFilesOK
+    numberFilesModifiedMensual += numberOfFilesNoOk
     str1 = "Numero de archivos OK: " + str(numberOfFilesOK)
     str2 = "Numero de archivos MODIFICADOS: " + str(numberOfFilesNoOk)
     logging.info(str1)
@@ -198,9 +207,18 @@ def compareHashes():
     else:
         toaster.show_toast(
             "HIDS", "Examen finalizado. Se mantiene la integridad.", duration=interval, threaded=True)
+        
+    if(contadorDeDias==31):
+        global contadorDeMes
+        contadorDeMes += 1
+        porcentaje = (numberFilesModifiedMensual/(numberFilesModifiedMensual+numberFilesOkMensual))*100
+        path = "reporteMensual"+str(contadorDeMes)+".txt"
+        with open(path, "w") as reporte:
+            reporte.write("\nNumero de ficheros sin modificar en el mes: " +str(numberFilesOkMensual))
+            reporte.write("\nNumero de ficheros modificados en el mes: " +str(numberFilesModifiedMensual))
+            reporte.write("\nPorcentaje de integridad comprometida en el mes: " +str(porcentaje))
+        logging.info("Se ha generado un reporte mensual nuevo!")
 
-
-    
 
 def guiHandle():
     t = Thread(target=gui)
@@ -219,7 +237,7 @@ def run():
         begin_time = datetime.datetime.now()
         pathName = configDict["Directories to protect"]
         global newFilesAndHashes
-        newFilesAndHashes = folderHash(pathName)
+        newFilesAndHashes = hashearCarpeta(pathName)
         compareHashes()
         logBox.config(state=tk.NORMAL)
         logBoxContainer()  # AQUI EL LOG BOX
@@ -243,7 +261,7 @@ def importarConfigYHashes():
 def crearHashes():
     pathName = configDict["Directories to protect"]
     global filesAndHashes
-    filesAndHashes = folderHash(pathName)
+    filesAndHashes = hashearCarpeta(pathName)
     exportarHashesADocumento(filesAndHashes)
     
 def detenerExamen():
@@ -282,10 +300,30 @@ def gui():
         
 def menu():
     title = logo
-    options = ['Importar configuracion', 'Empezar Examen', 'Detener Examen', 'Ver Logs', 'Cerrar']
+    options = ['Configurar fichero de configuración', 'Importar configuracion', 'Empezar Examen',
+                'Detener Examen', 'Ver Logs', 'Cerrar']
     option, index = pick(options, title, indicator='=>', default_index=0)
     
-    if option == 'Importar configuracion':
+    if option == 'Configurar fichero de configuración':
+        path = "config.config"
+        if (os.path.exists(path)):
+            webbrowser.open_new("config.config")
+        else:
+            configs = ["\nSelected Hash mode=\n",
+                   "Directories to protect=\n", "Verify interval=\n"]
+            try:
+                with open("config.config", "w") as file:
+                    file.write(
+                        "# Agregar los directorios a proteger, separados por una coma\n# Intervalo de tiempo entre examenes en minutos\n# Guardar la configuracion antes de iniciar el examen \n# Los Hash que soportan son: sha3_256, sha3_384, sha3_512 o md5\n# Para el directorio a proteger debe empezar con 'C:\\'")
+                    for config in configs:
+                        file.write(config)
+                logging.info("Archivo de configuracion creado satisfactoriamente!")
+                webbrowser.open_new("config.config")
+            except:
+                logging.error(
+                    "Error al crear el archivo de configuracion, problema con los permisos?")
+                
+    elif option == 'Importar configuracion':
         importarConfigYHashes()
         generarFicheros()
     elif option == 'Empezar Examen':
@@ -294,35 +332,14 @@ def menu():
     elif option == 'Detener Examen':
         detenerExamen()
     elif option == 'Ver Logs':
-        webbrowser.open_new("log.log")
+        path = "log.log"
+        if (os.path.exists(path)):
+            webbrowser.open_new("log.log")
     elif option == 'Cerrar':
         os.system(quit())
     
     menu()
 
-'''def iniciar():
-    
-    filename = "log.log"
-    logging.basicConfig(format='%(levelname)s:%(asctime)s: %(message)s',
-                        datefmt='%d/%m/%Y %H:%M:%S', filename=filename, level=logging.INFO)
-    importConfig()
-    #Una vez importada la configuración debemos calcular los hashes de los docs:
-    global configDict
-    pathName = configDict["Directories to protect"]
-    global filesAndHashes
-    filesAndHashes = folderHash(pathName)
-    #print(filesAndHashes)
-    exportarHashesADocumento(filesAndHashes)
-    runHandle()
-    run()
-    #gui()'''
-
 
 if __name__ == "__main__":
-    #print(os.path.exists("C:\\Users\Servando\Desktop\Carpeta de Ejemplo"))
-    '''path = "C:\\Users\Servando\Desktop\Carpeta de Ejemplo\Ejemplo 2"
-    with open(path, "w") as file:
-                file.write("Esto es un ejemplo de fichero")'''
     menu()
-    #iniciar()
-    #print(os.path.abspath('.').split(os.path.sep)[0]+os.path.sep+"top_secret\log.log")
