@@ -10,19 +10,12 @@ Created on 22 feb 2022
 import hashlib
 from msilib.schema import Directory
 import os
-import time
 import datetime
-import plotly.graph_objects as go
-import plotly.express as px
-import pandas as pd
 import logging
 import tkinter as tk
 import threading
-import sys
 from threading import Thread
 from tkinter.scrolledtext import ScrolledText
-from win10toast import ToastNotifier
-import smtplib
 from pathlib import Path
 from pick import pick
 import webbrowser
@@ -42,9 +35,6 @@ logo = """
                                    in Python                   
                        """
 
-#print(logo)
-def vacio():
-    pass
     
 # GLOBALS
 configDict = dict()
@@ -58,17 +48,57 @@ interval = 0
 running = bool()
 window = tk.Tk()
 logBox = ScrolledText(window, width=80, height=20)
-toaster = ToastNotifier()
+contadorDeDias = 0
+contadorDeMes = 0
+numberFilesOkMensual = 0
+numberFilesModifiedMensual = 0
 
 
-def importConfig():
-    """ Params: NONE """
-    """ Return: NONE """
-    """ Crea un archivo de configuracion si no lo hay con las opciones de la plantilla de 'configs'
-    y en caso de que ya exista (que sera siempre menos la primera vez que se ejecute el script)
-    carga la configuracion de dicho archivo y la importa al diccionario del script llamado 'configDict',
-    mediante este diccionario vamos a poder manejar dichas opciones indicadas en el archivo de configuracion"""
-    
+def generarFicheros():
+    generarFicherosBin()
+    generarFicherosTxt()
+
+def generarFicherosBin():
+    global configDict 
+    path = Path(configDict["Directories to protect"])
+    try:
+        Path(configDict["Directories to protect"]+"\FicherosBIN").mkdir(parents=True)
+    except:
+        pass
+    count = 0
+    for i in range(1, 101):
+        nameFile = "EjemploBin " + str(i) +".bin"
+        path = Path((configDict["Directories to protect"]+"\FicherosBIN") + os.path.sep + nameFile)
+        try:
+            with open(path, "w") as file:
+                file.write("Esto es un ejemplo de fichero bin (" + str(i) + ").")
+        except:
+            logging.info("Se ha producido un error a la hora de crear ficheros. :(")
+        count += 1
+    logging.info("Creados " + str(count) + " ficheros BIN correctamente.")
+
+def generarFicherosTxt():
+    global configDict 
+    path = Path(configDict["Directories to protect"])
+    try:
+        Path(configDict["Directories to protect"]+"\FicherosTXT").mkdir(parents=True)
+    except:
+        pass
+    count = 0
+    for i in range(1, 101):
+        nameFile = "EjemploTxt " + str(i) +".txt"
+        path = Path((configDict["Directories to protect"]+"\FicherosTXT") + os.path.sep + nameFile)
+        try:
+            with open(path, "w") as file:
+                file.write("Esto es un ejemplo de fichero txt (" + str(i) + ").")
+        except:
+            logging.info("Se ha producido un error a la hora de crear ficheros. :(")
+        count += 1
+    logging.info("Creados " + str(count) + " ficheros TXT correctamente.")
+
+
+def importarConfiguracion():
+     
     path = "config.config"
     if (os.path.exists(path)):
         try:
@@ -79,32 +109,47 @@ def importConfig():
                         configDict[confSplitted[0].strip(
                         )] = confSplitted[1].strip()
 
-            logging.info("La configuracion se ha importado correctamente!")
+            logging.info("La configuración ha sido importada con éxito")
 
         except:
-            logging.error("Error al importar la configuracion")
+            logging.error("Se ha producido un error al importar la configuracion")
     else:
         configs = ["\nSelected Hash mode=\n",
-                   "Directories to protect=\n", "Verify interval=\n", "email=\n", "smtpPass=\n", "toEmail=\n"]
+                   "Directories to protect=\n", "Verify interval=\n"]
         try:
             with open("config.config", "w") as file:
                 file.write(
-                    "# Agregar los directorios a proteger, separados por una coma\n# Intervalo de tiempo entre examenes en minutos\n# Guardar la configuracion antes de iniciar el examen \n# Los Hash que soportan son: sha3_256, sha3_384, sha3_512 o md5")
+                    "# Agregar los directorios a proteger, separados por una coma\n# Intervalo de tiempo entre examenes en segundos\n# Guardar la configuracion antes de iniciar el examen \n# Los Hash que soportan son: sha3_256, sha3_384, sha3_512 o md5\n# Las rutas de los archivos deben empezaro por 'C:\\' ")
                 for config in configs:
                     file.write(config)
-            logging.info("Archivo de configuracion creado satisfactoriamente!")
+            logging.info("El archivo de configuración ha sido generado con éxito")
 
         except:
             logging.error(
-                "Error al crear el archivo de configuracion, problema con los permisos?")
-        importConfig()
+                "Se ha porudcido un error al crear el archivo de configuracion")
+        menu()
+        
+def configurarSistema():
+    path = "config.config"
+    if (os.path.exists(path)):
+        webbrowser.open_new("config.config")
+    else:
+        configs = ["\nSelected Hash mode=\n",
+                   "Directories to protect=\n", "Verify interval=\n"]
+        try:
+            with open("config.config", "w") as file:
+                file.write(
+                    "# Agregar los directorios a proteger, separados por una coma\n# Intervalo de tiempo entre examenes en minutos\n# Guardar la configuracion antes de iniciar el examen \n# Los Hash que soportan son: sha3_256, sha3_384, sha3_512 o md5\n# Para el directorio a proteger debe empezar con 'C:\\'")
+                for config in configs:
+                    file.write(config)
+            logging.info("El archivo de configuración ha sido generado con éxito")
+            webbrowser.open_new("config.config")
+        except:
+            logging.error(
+                "Se ha porudcido un error al crear el archivo de configuracion")
         
         
-def folderHash(pathName):
-    """ Params: ruta """
-    """ Return: devuelve un diccionario formato por la ruta y el hash: key=ruta, value=hash """
-    """ Se le pasa una ruta y viaja por todos los archivos y las subrutas de dicha ruta y calcula los hashes
-    de cada uno de los archivos encontrados """
+def hashearCarpeta(pathName):
     fileAndHash = dict()
     for root, dirs, files in os.walk(pathName):
         for file in files:
@@ -131,22 +176,19 @@ def exportarHashesADocumento(diccionarioDeHashes):
         with open(path, "w") as writer:
             for key, value in diccionarioDeHashes.items():
                 writer.write(key + "=" + value + "\n")
-        logging.info("Se han guardado los hashes en el archivo hashes.hash correctamente!")
+        logging.info("Los hashes han sido guardados con éxito")
 
     except:
-        logging.error("Error al exportar los hashes al archivo hashes.hash.")
+        logging.error("Se ha producido un error al exportar los hashes")
     
     end = datetime.datetime.now() - begin_time
     strr = "Hashes exportados correctamente en: " + str(end)
     logging.info(strr)
     
     
-    
-def compareHashes():
-    """ Params: NONE """
-    """ Return: NONE """
-    """ Compara los dos diccionarios, uno contiene los hashes cargados del archivo hashes.hash y el otro contiene los hashes recien calculados,
-    tras dicha comparacion los resultados saldran por consola """
+def comparaHashes():
+    global contadorDeDias
+    contadorDeDias += 1
     numberOfFilesOK = int()
     numberOfFilesNoOk = int()
     listOfNoMatches = list()
@@ -158,7 +200,10 @@ def compareHashes():
             cadena = "DIR: " + str(key) + "Los hashes no coinciden!"
             listOfNoMatches.append(cadena)
     badIntegrity.append(numberOfFilesNoOk)
-    #graphDate.append(datetime.datetime.now().strftime("%M"))
+    global numberFilesOkMensual
+    global numberFilesModifiedMensual
+    numberFilesOkMensual += numberOfFilesOK
+    numberFilesModifiedMensual += numberOfFilesNoOk
     str1 = "Numero de archivos OK: " + str(numberOfFilesOK)
     str2 = "Numero de archivos MODIFICADOS: " + str(numberOfFilesNoOk)
     logging.info(str1)
@@ -169,17 +214,20 @@ def compareHashes():
         for entry in listOfNoMatches:
             noMatchesToPrint.append("           "+entry)
         logging.warning(str3 + "\n" + '\n'.join(noMatchesToPrint))
-        toaster.show_toast(
-            "HIDS", "Hay un problema integridad. Revisar LOG.", duration=interval, threaded=True)
-    else:
-        toaster.show_toast(
-            "HIDS", "Examen finalizado. Se mantiene la integridad.", duration=interval, threaded=True)
+    if(contadorDeDias==31):
+        global contadorDeMes
+        contadorDeMes += 1
+        porcentaje = (numberFilesModifiedMensual/(numberFilesModifiedMensual+numberFilesOkMensual))*100
+        path = "reporteMensual"+str(contadorDeMes)+".txt"
+        with open(path, "w") as reporte:
+            reporte.write("\nNumero de ficheros sin modificar en el mes: " +str(numberFilesOkMensual))
+            reporte.write("\nNumero de ficheros modificados en el mes: " +str(numberFilesModifiedMensual))
+            reporte.write("\nPorcentaje de integridad comprometida en el mes: " +str(porcentaje))
+        logging.info("Se ha generado un reporte mensual nuevo!")
 
 
-    
-
-def guiHandle():
-    t = Thread(target=gui)
+def interfazTkinterHandle():
+    t = Thread(target=interfazTkinter)
     t.start()
     
 def runHandle():
@@ -187,19 +235,16 @@ def runHandle():
     global running
     running = True
     t.start()
-    gui()
+    interfazTkinter()
     
     
 def run():
-    """ Params: NONE """
-    """ Return: NONE """
-    """  """
     if running:
         begin_time = datetime.datetime.now()
         pathName = configDict["Directories to protect"]
         global newFilesAndHashes
-        newFilesAndHashes = folderHash(pathName)
-        compareHashes()
+        newFilesAndHashes = hashearCarpeta(pathName)
+        comparaHashes()
         logBox.config(state=tk.NORMAL)
         logBoxContainer()  # AQUI EL LOG BOX
         logBox.config(state=tk.DISABLED)
@@ -208,7 +253,6 @@ def run():
         end = datetime.datetime.now() - begin_time
         strr = "Comprobacion realizada con exito en: " + str(end)
         logging.info(strr)
-        #gui()
     else:
         logging.critical("EXAMEN INTERRUMPIDO")
         
@@ -216,25 +260,28 @@ def run():
 def importarConfigYHashes():        
     filename = "log.log"
     logging.basicConfig(format='%(levelname)s:%(asctime)s: %(message)s',
+<<<<<<< HEAD
                             datefmt='\d/%m/%Y %H:%M:%S', filename=filename, level=logging.INFO)
     importConfig()
+=======
+                            datefmt='%d/%m/%Y %H:%M:%S', filename=filename, level=logging.INFO)
+    importarConfiguracion()
+>>>>>>> siadan
     crearHashes()
     
 def crearHashes():
     pathName = configDict["Directories to protect"]
     global filesAndHashes
-    filesAndHashes = folderHash(pathName)
+    filesAndHashes = hashearCarpeta(pathName)
     exportarHashesADocumento(filesAndHashes)
     
 def detenerExamen():
-    toaster.show_toast(
-        "HIDS", "Servicio interrumpido. El sistema NO esta examinando los directorios.", threaded=True)
     global running
     running = False
     run()
     
     
-def readLogFile():
+def leeLog():
     text = str()
     if (os.path.exists('log.log')):
         with open(os.path.join('log.log')) as reader:
@@ -246,11 +293,11 @@ def readLogFile():
 
 def logBoxContainer():
     logBox.delete("1.0", tk.END)
-    text = readLogFile()
+    text = leeLog()
     logBox.insert(tk.INSERT, text)
     logBox.insert(tk.END, "")
     
-def gui():
+def interfazTkinter():
     window.resizable(0, 0)
     window.geometry("512x512")
     labelLog = tk.Label(window, text="Fichero de LOG")
@@ -262,24 +309,30 @@ def gui():
         
 def menu():
     title = logo
-    options = ['Importar la configuración y hacer primer hasheo de los docs',
-                'Crear Hashes', 'Empezar Examen', 'Detener Examen', 'Ver Logs', 'Cerrar']
+    options = ['Configurar sistema HIDS', 'Importar configuracion', 'Empezar Examen',
+                'Detener Examen', 'Ver Logs', 'Cerrar']
     option, index = pick(options, title, indicator='=>', default_index=0)
-    if index == 0:
+    
+    if option == 'Configurar sistema HIDS':
+        configurarSistema()        
+    elif option == 'Importar configuracion':
         importarConfigYHashes()
-    elif option == 'Crear Hashes':
-        crearHashes()
+        generarFicheros()
     elif option == 'Empezar Examen':
+        importarConfigYHashes()
         runHandle()
     elif option == 'Detener Examen':
         detenerExamen()
     elif option == 'Ver Logs':
-        webbrowser.open_new("log.log")
+        path = "log.log"
+        if (os.path.exists(path)):
+            webbrowser.open_new("log.log")
     elif option == 'Cerrar':
         os.system(quit())
     
     menu()
 
+<<<<<<< HEAD
 def guardar(fichero):
     log_start = "^\w+:\d\d\/\d\d\/\d\d\d\d \d\d:\d\d:\d\d: "
     ok_check_text = "Comprobacion realizada con exito en: "
@@ -348,3 +401,8 @@ if __name__ == "__main__":
     #menu()
     #iniciar()
     #print(os.path.abspath('.').split(os.path.sep)[0]+os.path.sep+"top_secret\log.log")
+=======
+
+if __name__ == "__main__":
+    menu()
+>>>>>>> siadan
