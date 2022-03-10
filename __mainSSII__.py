@@ -2,7 +2,7 @@
 '''
 Created on 22 feb 2022
 
-@author: Servando
+@author: Servando, Siamion, Jorge
 '''
 #ficheros binarios, de imágenes y directorios
 #de los sistemas informáticos críticos y las aplicaciones de la organización y dar cuenta
@@ -110,7 +110,7 @@ def importarConfiguracion():
             logging.info("La configuración ha sido importada con éxito")
 
         except:
-            logging.error("Se ha producido un error al importar la configuracion")
+            logging.error("Se ha producido un error al importar la configuración")
     else:
         configs = ["\nSelected Hash mode=\n",
                    "Directories to protect=\n", "Verify interval=\n"]
@@ -124,7 +124,7 @@ def importarConfiguracion():
 
         except:
             logging.error(
-                "Se ha porudcido un error al crear el archivo de configuracion")
+                "Se ha producido un error al crear el archivo de configuración")
         menu()
         
 def configurarSistema():
@@ -144,7 +144,7 @@ def configurarSistema():
             webbrowser.open_new("config.config")
         except:
             logging.error(
-                "Se ha porudcido un error al crear el archivo de configuracion")
+                "Se ha producido un error al crear el archivo de configuración")
         
         
 def hashearCarpeta(pathName):
@@ -249,7 +249,7 @@ def run():
         interval = configDict["Verify interval"]
         threading.Timer(float(interval), run).start()
         end = datetime.datetime.now() - begin_time
-        strr = "Comprobacion realizada con exito en: " + str(end)
+        strr = "Comprobación realizada con éxito en: " + str(end)
         logging.info(strr)
     else:
         logging.critical("EXAMEN INTERRUMPIDO")
