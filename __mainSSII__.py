@@ -220,7 +220,7 @@ def comparaHashes():
         with open(path, "w") as reporte:
             reporte.write("\nNumero de ficheros sin modificar en el mes: " +str(numberFilesOkMensual))
             reporte.write("\nNumero de ficheros modificados en el mes: " +str(numberFilesModifiedMensual))
-            reporte.write("\nPorcentaje de integridad comprometida en el mes: " +str(porcentaje))
+            reporte.write("\nPorcentaje de integridad comprometida en el mes: " +str(porcentaje) + "%")
         logging.info("Se ha generado un reporte mensual nuevo!")
 
 
