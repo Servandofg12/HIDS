@@ -1,0 +1,101 @@
+INFO:10/03/2022 17:24:42: La configuración ha sido importada con éxito
+INFO:10/03/2022 17:24:42: Los hashes han sido guardados con éxito
+INFO:10/03/2022 17:24:42: Hashes exportados correctamente en: 0:00:00.001522
+INFO:10/03/2022 17:24:42: Creados 100 ficheros BIN correctamente.
+INFO:10/03/2022 17:24:42: Creados 100 ficheros TXT correctamente.
+INFO:10/03/2022 17:24:43: La configuración ha sido importada con éxito
+INFO:10/03/2022 17:24:43: Los hashes han sido guardados con éxito
+INFO:10/03/2022 17:24:43: Hashes exportados correctamente en: 0:00:00.002975
+INFO:10/03/2022 17:24:43: Numero de archivos OK: 202
+INFO:10/03/2022 17:24:43: Numero de archivos MODIFICADOS: 0
+INFO:10/03/2022 17:24:43: Comprobación realizada con éxito en: 0:00:00.109641
+INFO:10/03/2022 17:24:49: Numero de archivos OK: 202
+INFO:10/03/2022 17:24:49: Numero de archivos MODIFICADOS: 0
+INFO:10/03/2022 17:24:49: Comprobación realizada con éxito en: 0:00:00.195925
+INFO:10/03/2022 17:24:54: Numero de archivos OK: 202
+INFO:10/03/2022 17:24:54: Numero de archivos MODIFICADOS: 0
+INFO:10/03/2022 17:24:54: Comprobación realizada con éxito en: 0:00:00.116061
+INFO:10/03/2022 17:24:59: Numero de archivos OK: 202
+INFO:10/03/2022 17:24:59: Numero de archivos MODIFICADOS: 0
+INFO:10/03/2022 17:24:59: Comprobación realizada con éxito en: 0:00:00.120415
+INFO:10/03/2022 17:25:04: Numero de archivos OK: 201
+INFO:10/03/2022 17:25:04: Numero de archivos MODIFICADOS: 1
+WARNING:10/03/2022 17:25:04: Archivos con integridad comprometida: 
+           DIR: C:/Users/Servando/Desktop/Carpeta a proteger HIDS/FicherosTXT/EjemploTxt 1.txtLos hashes no coinciden!
+INFO:10/03/2022 17:25:04: Comprobación realizada con éxito en: 0:00:00.088539
+INFO:10/03/2022 17:25:09: Numero de archivos OK: 201
+INFO:10/03/2022 17:25:09: Numero de archivos MODIFICADOS: 1
+WARNING:10/03/2022 17:25:09: Archivos con integridad comprometida: 
+           DIR: C:/Users/Servando/Desktop/Carpeta a proteger HIDS/FicherosTXT/EjemploTxt 1.txtLos hashes no coinciden!
+INFO:10/03/2022 17:25:09: Comprobación realizada con éxito en: 0:00:00.082832
+INFO:10/03/2022 17:25:14: Numero de archivos OK: 201
+INFO:10/03/2022 17:25:14: Numero de archivos MODIFICADOS: 1
+WARNING:10/03/2022 17:25:14: Archivos con integridad comprometida: 
+           DIR: C:/Users/Servando/Desktop/Carpeta a proteger HIDS/FicherosTXT/EjemploTxt 1.txtLos hashes no coinciden!
+CRITICAL:10/03/2022 17:25:17: EXAMEN INTERRUMPIDO
+INFO:10/03/2022 17:31:00: La configuración ha sido importada con éxito
+INFO:10/03/2022 17:31:00: Los hashes han sido guardados con éxito
+INFO:10/03/2022 17:31:00: Hashes exportados correctamente en: 0:00:00.006300
+INFO:10/03/2022 17:31:01: Numero de archivos OK: 202
+INFO:10/03/2022 17:31:01: Numero de archivos MODIFICADOS: 0
+INFO:10/03/2022 17:34:46: La configuración ha sido importada con éxito
+INFO:10/03/2022 17:34:46: Los hashes han sido guardados con éxito
+INFO:10/03/2022 17:34:46: Hashes exportados correctamente en: 0:00:00.004456
+INFO:10/03/2022 17:34:46: Creados 100 ficheros BIN correctamente.
+INFO:10/03/2022 17:34:46: Creados 100 ficheros TXT correctamente.
+INFO:10/03/2022 17:34:55: La configuración ha sido importada con éxito
+INFO:10/03/2022 17:34:56: Los hashes han sido guardados con éxito
+INFO:10/03/2022 17:34:56: Hashes exportados correctamente en: 0:00:00.006448
+INFO:10/03/2022 17:34:56: Numero de archivos OK: 202
+INFO:10/03/2022 17:34:56: Numero de archivos MODIFICADOS: 0
+INFO:10/03/2022 17:34:56: Comprobación realizada con éxito en: 0:00:00.194000
+INFO:10/03/2022 17:35:00: Numero de archivos OK: 202
+INFO:10/03/2022 17:35:00: Numero de archivos MODIFICADOS: 0
+INFO:10/03/2022 17:35:00: Comprobación realizada con éxito en: 0:00:00.077875
+INFO:10/03/2022 17:35:04: Numero de archivos OK: 202
+INFO:10/03/2022 17:35:04: Numero de archivos MODIFICADOS: 0
+INFO:10/03/2022 17:35:04: Comprobación realizada con éxito en: 0:00:00.187201
+INFO:10/03/2022 17:35:08: Numero de archivos OK: 202
+INFO:10/03/2022 17:35:08: Numero de archivos MODIFICADOS: 0
+INFO:10/03/2022 17:35:08: Comprobación realizada con éxito en: 0:00:00.116546
+INFO:10/03/2022 17:35:12: Numero de archivos OK: 201
+INFO:10/03/2022 17:35:12: Numero de archivos MODIFICADOS: 1
+WARNING:10/03/2022 17:35:12: Archivos con integridad comprometida: 
+           DIR: C:/Users/Servando/Desktop/Carpeta a proteger HIDS/FicherosTXT/EjemploTxt 1.txtLos hashes no coinciden!
+INFO:10/03/2022 17:35:13: Comprobación realizada con éxito en: 0:00:00.104160
+INFO:10/03/2022 17:35:17: Numero de archivos OK: 201
+INFO:10/03/2022 17:35:17: Numero de archivos MODIFICADOS: 1
+WARNING:10/03/2022 17:35:17: Archivos con integridad comprometida: 
+           DIR: C:/Users/Servando/Desktop/Carpeta a proteger HIDS/FicherosTXT/EjemploTxt 1.txtLos hashes no coinciden!
+INFO:10/03/2022 17:35:17: Comprobación realizada con éxito en: 0:00:00.230118
+INFO:10/03/2022 17:35:21: Numero de archivos OK: 201
+INFO:10/03/2022 17:35:21: Numero de archivos MODIFICADOS: 1
+WARNING:10/03/2022 17:35:21: Archivos con integridad comprometida: 
+           DIR: C:/Users/Servando/Desktop/Carpeta a proteger HIDS/FicherosTXT/EjemploTxt 1.txtLos hashes no coinciden!
+INFO:10/03/2022 17:35:21: Comprobación realizada con éxito en: 0:00:00.072415
+CRITICAL:10/03/2022 17:35:25: EXAMEN INTERRUMPIDO
+CRITICAL:10/03/2022 17:35:25: EXAMEN INTERRUMPIDO
+INFO:10/03/2022 17:35:43: La configuración ha sido importada con éxito
+INFO:10/03/2022 17:35:43: Los hashes han sido guardados con éxito
+INFO:10/03/2022 17:35:43: Hashes exportados correctamente en: 0:00:00.003437
+INFO:10/03/2022 17:35:43: Numero de archivos OK: 202
+INFO:10/03/2022 17:35:43: Numero de archivos MODIFICADOS: 0
+INFO:10/03/2022 17:35:51: La configuración ha sido importada con éxito
+INFO:10/03/2022 17:35:51: Los hashes han sido guardados con éxito
+INFO:10/03/2022 17:35:51: Hashes exportados correctamente en: 0:00:00.001984
+INFO:10/03/2022 17:35:51: Numero de archivos OK: 202
+INFO:10/03/2022 17:35:51: Numero de archivos MODIFICADOS: 0
+INFO:10/03/2022 17:35:51: Comprobación realizada con éxito en: 0:00:00.103629
+INFO:10/03/2022 17:35:55: Numero de archivos OK: 202
+INFO:10/03/2022 17:35:55: Numero de archivos MODIFICADOS: 0
+INFO:10/03/2022 17:35:55: Comprobación realizada con éxito en: 0:00:00.130276
+INFO:10/03/2022 17:35:57: La configuración ha sido importada con éxito
+INFO:10/03/2022 17:35:57: Los hashes han sido guardados con éxito
+INFO:10/03/2022 17:35:57: Hashes exportados correctamente en: 0:00:00.003387
+INFO:10/03/2022 17:35:58: Creados 100 ficheros BIN correctamente.
+INFO:10/03/2022 17:35:58: Creados 100 ficheros TXT correctamente.
+INFO:10/03/2022 17:36:00: Numero de archivos OK: 201
+INFO:10/03/2022 17:36:00: Numero de archivos MODIFICADOS: 1
+WARNING:10/03/2022 17:36:00: Archivos con integridad comprometida: 
+           DIR: C:/Users/Servando/Desktop/Carpeta a proteger HIDS/FicherosTXT/EjemploTxt 1.txtLos hashes no coinciden!
+CRITICAL:10/03/2022 17:36:11: EXAMEN INTERRUMPIDO

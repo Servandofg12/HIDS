@@ -117,7 +117,7 @@ def importarConfiguracion():
         try:
             with open("config.config", "w") as file:
                 file.write(
-                    "# Agregar los directorios a proteger, separados por una coma\n# Intervalo de tiempo entre examenes en segundos\n# Guardar la configuracion antes de iniciar el examen \n# Los Hash que soportan son: sha3_256, sha3_384, sha3_512 o md5\n# Las rutas de los archivos deben empezaro por 'C:\\' ")
+                    "# Agregar el directorio a proteger\n# Intervalo de tiempo entre examenes en segundos\n# Guardar la configuracion antes de iniciar el examen \n# Los Hash que soportan son: sha3_256, sha3_384, sha3_512 o md5\n# Las rutas de los archivos deben empezar por 'C:\\' o 'C:\' con todas las barras invertidas ")
                 for config in configs:
                     file.write(config)
             logging.info("El archivo de configuración ha sido generado con éxito")
@@ -137,7 +137,7 @@ def configurarSistema():
         try:
             with open("config.config", "w") as file:
                 file.write(
-                    "# Agregar los directorios a proteger, separados por una coma\n# Intervalo de tiempo entre examenes en minutos\n# Guardar la configuracion antes de iniciar el examen \n# Los Hash que soportan son: sha3_256, sha3_384, sha3_512 o md5\n# Para el directorio a proteger debe empezar con 'C:\\'")
+                    "# Agregar el directorio a proteger\n# Intervalo de tiempo entre examenes en segundos\n# Guardar la configuracion antes de iniciar el examen \n# Los Hash que soportan son: sha3_256, sha3_384, sha3_512 o md5\n# Las rutas de los archivos deben empezar por 'C:\\' o 'C:\' con todas las barras invertidas ")
                 for config in configs:
                     file.write(config)
             logging.info("El archivo de configuración ha sido generado con éxito")
@@ -195,7 +195,7 @@ def comparaHashes():
             numberOfFilesOK += 1
         else:
             numberOfFilesNoOk += 1
-            cadena = "DIR: " + str(key) + "Los hashes no coinciden!"
+            cadena = "DIR: " + str(key) + " Los hashes no coinciden!"
             listOfNoMatches.append(cadena)
     badIntegrity.append(numberOfFilesNoOk)
     global numberFilesOkMensual
