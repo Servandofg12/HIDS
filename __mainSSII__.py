@@ -9,23 +9,15 @@ Created on 22 feb 2022
 #mensualmente
 import hashlib
 import os
-import time
 import datetime
-import plotly.graph_objects as go
-import plotly.express as px
-import pandas as pd
 import logging
 import tkinter as tk
 import threading
-import sys
 from threading import Thread
 from tkinter.scrolledtext import ScrolledText
-from win10toast import ToastNotifier
-import smtplib
 from pathlib import Path
 from pick import pick
 import webbrowser
-import pathlib
 
     
 logo = """
@@ -54,7 +46,6 @@ interval = 0
 running = bool()
 window = tk.Tk()
 logBox = ScrolledText(window, width=80, height=20)
-toaster = ToastNotifier()
 contadorDeDias = 0
 contadorDeMes = 0
 numberFilesOkMensual = 0
@@ -104,7 +95,7 @@ def generarFicherosTxt():
     logging.info("Creados " + str(count) + " ficheros TXT correctamente.")
 
 
-def importConfig():
+def importarConfiguracion():
      
     path = "config.config"
     if (os.path.exists(path)):
@@ -116,25 +107,44 @@ def importConfig():
                         configDict[confSplitted[0].strip(
                         )] = confSplitted[1].strip()
 
-            logging.info("La configuracion se ha importado correctamente!")
+            logging.info("La configuración ha sido importada con éxito")
 
         except:
-            logging.error("Error al importar la configuracion")
+            logging.error("Se ha producido un error al importar la configuracion")
     else:
         configs = ["\nSelected Hash mode=\n",
                    "Directories to protect=\n", "Verify interval=\n"]
         try:
             with open("config.config", "w") as file:
                 file.write(
-                    "# Agregar los directorios a proteger, separados por una coma\n# Intervalo de tiempo entre examenes en minutos\n# Guardar la configuracion antes de iniciar el examen \n# Los Hash que soportan son: sha3_256, sha3_384, sha3_512 o md5")
+                    "# Agregar los directorios a proteger, separados por una coma\n# Intervalo de tiempo entre examenes en segundos\n# Guardar la configuracion antes de iniciar el examen \n# Los Hash que soportan son: sha3_256, sha3_384, sha3_512 o md5\n# Las rutas de los archivos deben empezaro por 'C:\\' ")
                 for config in configs:
                     file.write(config)
-            logging.info("Archivo de configuracion creado satisfactoriamente!")
+            logging.info("El archivo de configuración ha sido generado con éxito")
 
         except:
             logging.error(
-                "Error al crear el archivo de configuracion, problema con los permisos?")
+                "Se ha porudcido un error al crear el archivo de configuracion")
         menu()
+        
+def configurarSistema():
+    path = "config.config"
+    if (os.path.exists(path)):
+        webbrowser.open_new("config.config")
+    else:
+        configs = ["\nSelected Hash mode=\n",
+                   "Directories to protect=\n", "Verify interval=\n"]
+        try:
+            with open("config.config", "w") as file:
+                file.write(
+                    "# Agregar los directorios a proteger, separados por una coma\n# Intervalo de tiempo entre examenes en minutos\n# Guardar la configuracion antes de iniciar el examen \n# Los Hash que soportan son: sha3_256, sha3_384, sha3_512 o md5\n# Para el directorio a proteger debe empezar con 'C:\\'")
+                for config in configs:
+                    file.write(config)
+            logging.info("El archivo de configuración ha sido generado con éxito")
+            webbrowser.open_new("config.config")
+        except:
+            logging.error(
+                "Se ha porudcido un error al crear el archivo de configuracion")
         
         
 def hashearCarpeta(pathName):
@@ -164,17 +174,17 @@ def exportarHashesADocumento(diccionarioDeHashes):
         with open(path, "w") as writer:
             for key, value in diccionarioDeHashes.items():
                 writer.write(key + "=" + value + "\n")
-        logging.info("Se han guardado los hashes en el archivo hashes.hash correctamente!")
+        logging.info("Los hashes han sido guardados con éxito")
 
     except:
-        logging.error("Error al exportar los hashes al archivo hashes.hash.")
+        logging.error("Se ha producido un error al exportar los hashes")
     
     end = datetime.datetime.now() - begin_time
     strr = "Hashes exportados correctamente en: " + str(end)
     logging.info(strr)
     
     
-def compareHashes():
+def comparaHashes():
     global contadorDeDias
     contadorDeDias += 1
     numberOfFilesOK = int()
@@ -202,12 +212,6 @@ def compareHashes():
         for entry in listOfNoMatches:
             noMatchesToPrint.append("           "+entry)
         logging.warning(str3 + "\n" + '\n'.join(noMatchesToPrint))
-        toaster.show_toast(
-            "HIDS", "Hay un problema integridad. Revisar LOG.", duration=interval, threaded=True)
-    else:
-        toaster.show_toast(
-            "HIDS", "Examen finalizado. Se mantiene la integridad.", duration=interval, threaded=True)
-        
     if(contadorDeDias==31):
         global contadorDeMes
         contadorDeMes += 1
@@ -220,8 +224,8 @@ def compareHashes():
         logging.info("Se ha generado un reporte mensual nuevo!")
 
 
-def guiHandle():
-    t = Thread(target=gui)
+def interfazTkinterHandle():
+    t = Thread(target=interfazTkinter)
     t.start()
     
 def runHandle():
@@ -229,7 +233,7 @@ def runHandle():
     global running
     running = True
     t.start()
-    gui()
+    interfazTkinter()
     
     
 def run():
@@ -238,7 +242,7 @@ def run():
         pathName = configDict["Directories to protect"]
         global newFilesAndHashes
         newFilesAndHashes = hashearCarpeta(pathName)
-        compareHashes()
+        comparaHashes()
         logBox.config(state=tk.NORMAL)
         logBoxContainer()  # AQUI EL LOG BOX
         logBox.config(state=tk.DISABLED)
@@ -255,7 +259,7 @@ def importarConfigYHashes():
     filename = "log.log"
     logging.basicConfig(format='%(levelname)s:%(asctime)s: %(message)s',
                             datefmt='%d/%m/%Y %H:%M:%S', filename=filename, level=logging.INFO)
-    importConfig()
+    importarConfiguracion()
     crearHashes()
     
 def crearHashes():
@@ -265,14 +269,12 @@ def crearHashes():
     exportarHashesADocumento(filesAndHashes)
     
 def detenerExamen():
-    toaster.show_toast(
-        "HIDS", "Servicio interrumpido. El sistema NO esta examinando los directorios.", threaded=True)
     global running
     running = False
     run()
     
     
-def readLogFile():
+def leeLog():
     text = str()
     if (os.path.exists('log.log')):
         with open(os.path.join('log.log')) as reader:
@@ -284,11 +286,11 @@ def readLogFile():
 
 def logBoxContainer():
     logBox.delete("1.0", tk.END)
-    text = readLogFile()
+    text = leeLog()
     logBox.insert(tk.INSERT, text)
     logBox.insert(tk.END, "")
     
-def gui():
+def interfazTkinter():
     window.resizable(0, 0)
     window.geometry("512x512")
     labelLog = tk.Label(window, text="Fichero de LOG")
@@ -300,29 +302,12 @@ def gui():
         
 def menu():
     title = logo
-    options = ['Configurar fichero de configuración', 'Importar configuracion', 'Empezar Examen',
+    options = ['Configurar sistema HIDS', 'Importar configuracion', 'Empezar Examen',
                 'Detener Examen', 'Ver Logs', 'Cerrar']
     option, index = pick(options, title, indicator='=>', default_index=0)
     
-    if option == 'Configurar fichero de configuración':
-        path = "config.config"
-        if (os.path.exists(path)):
-            webbrowser.open_new("config.config")
-        else:
-            configs = ["\nSelected Hash mode=\n",
-                   "Directories to protect=\n", "Verify interval=\n"]
-            try:
-                with open("config.config", "w") as file:
-                    file.write(
-                        "# Agregar los directorios a proteger, separados por una coma\n# Intervalo de tiempo entre examenes en minutos\n# Guardar la configuracion antes de iniciar el examen \n# Los Hash que soportan son: sha3_256, sha3_384, sha3_512 o md5\n# Para el directorio a proteger debe empezar con 'C:\\'")
-                    for config in configs:
-                        file.write(config)
-                logging.info("Archivo de configuracion creado satisfactoriamente!")
-                webbrowser.open_new("config.config")
-            except:
-                logging.error(
-                    "Error al crear el archivo de configuracion, problema con los permisos?")
-                
+    if option == 'Configurar sistema HIDS':
+        configurarSistema()        
     elif option == 'Importar configuracion':
         importarConfigYHashes()
         generarFicheros()
