@@ -1,0 +1,4 @@
+
+Numero de ficheros sin modificar en el mes: 6262
+Numero de ficheros modificados en el mes: 0
+Porcentaje de integridad comprometida en el mes: 0.0

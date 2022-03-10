@@ -446,3 +446,174 @@ WARNING:08/03/2022 10:22:03: Archivos con integridad comprometida:
 INFO:08/03/2022 10:22:03: Comprobacion realizada con exito en: 0:00:00.138795
 CRITICAL:08/03/2022 10:22:05: EXAMEN INTERRUMPIDO
 CRITICAL:08/03/2022 10:22:05: EXAMEN INTERRUMPIDO
+INFO:08/03/2022 10:32:47: La configuracion se ha importado correctamente!
+INFO:08/03/2022 10:32:47: Se han guardado los hashes en el archivo hashes.hash correctamente!
+INFO:08/03/2022 10:32:47: Hashes exportados correctamente en: 0:00:00.004176
+INFO:08/03/2022 10:32:47: Creados 100 ficheros BIN correctamente.
+INFO:08/03/2022 10:32:47: Creados 100 ficheros TXT correctamente.
+INFO:08/03/2022 10:32:50: La configuracion se ha importado correctamente!
+INFO:08/03/2022 10:32:51: Se han guardado los hashes en el archivo hashes.hash correctamente!
+INFO:08/03/2022 10:32:51: Hashes exportados correctamente en: 0:00:00.004513
+INFO:08/03/2022 10:32:51: Numero de archivos OK: 202
+INFO:08/03/2022 10:32:51: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:32:51: Comprobacion realizada con exito en: 0:00:00.162684
+INFO:08/03/2022 10:32:53: Numero de archivos OK: 202
+INFO:08/03/2022 10:32:53: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:32:53: Comprobacion realizada con exito en: 0:00:00.098219
+INFO:08/03/2022 10:32:55: Numero de archivos OK: 202
+INFO:08/03/2022 10:32:55: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:32:55: Comprobacion realizada con exito en: 0:00:00.130872
+INFO:08/03/2022 10:32:58: Numero de archivos OK: 202
+INFO:08/03/2022 10:32:58: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:32:58: Comprobacion realizada con exito en: 0:00:00.155700
+INFO:08/03/2022 10:33:00: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:00: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:00: Comprobacion realizada con exito en: 0:00:00.116440
+INFO:08/03/2022 10:33:02: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:02: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:02: Comprobacion realizada con exito en: 0:00:00.199740
+INFO:08/03/2022 10:33:04: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:04: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:04: Comprobacion realizada con exito en: 0:00:00.127422
+INFO:08/03/2022 10:33:06: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:06: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:06: Comprobacion realizada con exito en: 0:00:00.193949
+INFO:08/03/2022 10:33:08: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:08: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:09: Comprobacion realizada con exito en: 0:00:00.204339
+INFO:08/03/2022 10:33:11: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:11: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:11: Comprobacion realizada con exito en: 0:00:00.177047
+INFO:08/03/2022 10:33:13: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:13: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:13: Comprobacion realizada con exito en: 0:00:00.159185
+INFO:08/03/2022 10:33:15: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:15: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:15: Comprobacion realizada con exito en: 0:00:00.195043
+INFO:08/03/2022 10:33:17: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:17: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:17: Comprobacion realizada con exito en: 0:00:00.174436
+INFO:08/03/2022 10:33:19: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:19: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:19: Comprobacion realizada con exito en: 0:00:00.168396
+INFO:08/03/2022 10:33:22: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:22: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:22: Comprobacion realizada con exito en: 0:00:00.133935
+INFO:08/03/2022 10:33:24: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:24: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:24: Comprobacion realizada con exito en: 0:00:00.148617
+INFO:08/03/2022 10:33:26: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:26: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:26: Comprobacion realizada con exito en: 0:00:00.146212
+INFO:08/03/2022 10:33:28: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:28: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:28: Comprobacion realizada con exito en: 0:00:00.132818
+INFO:08/03/2022 10:33:30: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:30: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:30: Comprobacion realizada con exito en: 0:00:00.184514
+INFO:08/03/2022 10:33:32: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:32: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:32: Comprobacion realizada con exito en: 0:00:00.093209
+INFO:08/03/2022 10:33:34: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:34: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:35: Comprobacion realizada con exito en: 0:00:00.177572
+INFO:08/03/2022 10:33:37: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:37: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:37: Comprobacion realizada con exito en: 0:00:00.229109
+INFO:08/03/2022 10:33:39: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:39: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:39: Comprobacion realizada con exito en: 0:00:00.196305
+INFO:08/03/2022 10:33:41: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:41: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:41: Comprobacion realizada con exito en: 0:00:00.239570
+INFO:08/03/2022 10:33:43: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:43: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:43: Comprobacion realizada con exito en: 0:00:00.130291
+INFO:08/03/2022 10:33:45: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:45: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:46: Comprobacion realizada con exito en: 0:00:00.133093
+INFO:08/03/2022 10:33:48: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:48: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:48: Comprobacion realizada con exito en: 0:00:00.200350
+INFO:08/03/2022 10:33:50: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:50: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:50: Comprobacion realizada con exito en: 0:00:00.077325
+INFO:08/03/2022 10:33:52: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:52: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:52: Comprobacion realizada con exito en: 0:00:00.228856
+INFO:08/03/2022 10:33:54: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:54: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:54: Comprobacion realizada con exito en: 0:00:00.166337
+INFO:08/03/2022 10:33:56: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:56: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:56: Se ha generado un reporte mensual nuevo!
+INFO:08/03/2022 10:33:56: Comprobacion realizada con exito en: 0:00:00.101960
+INFO:08/03/2022 10:33:58: Numero de archivos OK: 202
+INFO:08/03/2022 10:33:58: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:33:58: Comprobacion realizada con exito en: 0:00:00.127573
+INFO:08/03/2022 10:34:01: Numero de archivos OK: 202
+INFO:08/03/2022 10:34:01: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:34:01: Comprobacion realizada con exito en: 0:00:00.153217
+INFO:08/03/2022 10:34:03: Numero de archivos OK: 202
+INFO:08/03/2022 10:34:03: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:34:03: Comprobacion realizada con exito en: 0:00:00.145872
+INFO:08/03/2022 10:34:05: Numero de archivos OK: 202
+INFO:08/03/2022 10:34:05: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:34:05: Comprobacion realizada con exito en: 0:00:00.164180
+INFO:08/03/2022 10:34:07: Numero de archivos OK: 202
+INFO:08/03/2022 10:34:07: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:34:07: Comprobacion realizada con exito en: 0:00:00.142855
+INFO:08/03/2022 10:34:09: Numero de archivos OK: 202
+INFO:08/03/2022 10:34:09: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:34:09: Comprobacion realizada con exito en: 0:00:00.131026
+INFO:08/03/2022 10:34:11: Numero de archivos OK: 202
+INFO:08/03/2022 10:34:11: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:34:11: Comprobacion realizada con exito en: 0:00:00.168619
+INFO:08/03/2022 10:34:14: Numero de archivos OK: 202
+INFO:08/03/2022 10:34:14: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:34:14: Comprobacion realizada con exito en: 0:00:00.129060
+INFO:08/03/2022 10:34:16: Numero de archivos OK: 202
+INFO:08/03/2022 10:34:16: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:34:16: Comprobacion realizada con exito en: 0:00:00.163318
+INFO:08/03/2022 10:34:18: Numero de archivos OK: 202
+INFO:08/03/2022 10:34:18: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:34:18: Comprobacion realizada con exito en: 0:00:00.127478
+INFO:08/03/2022 10:34:20: Numero de archivos OK: 202
+INFO:08/03/2022 10:34:20: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:34:20: Comprobacion realizada con exito en: 0:00:00.124005
+INFO:08/03/2022 10:34:22: Numero de archivos OK: 202
+INFO:08/03/2022 10:34:22: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:34:22: Comprobacion realizada con exito en: 0:00:00.176051
+INFO:08/03/2022 10:34:24: Numero de archivos OK: 202
+INFO:08/03/2022 10:34:24: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:34:24: Comprobacion realizada con exito en: 0:00:00.127269
+INFO:08/03/2022 10:34:26: Numero de archivos OK: 202
+INFO:08/03/2022 10:34:26: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:34:27: Comprobacion realizada con exito en: 0:00:00.153005
+INFO:08/03/2022 10:34:29: Numero de archivos OK: 202
+INFO:08/03/2022 10:34:29: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:34:29: Comprobacion realizada con exito en: 0:00:00.133929
+INFO:08/03/2022 10:34:31: Numero de archivos OK: 202
+INFO:08/03/2022 10:34:31: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:34:31: Comprobacion realizada con exito en: 0:00:00.145303
+INFO:08/03/2022 10:34:33: Numero de archivos OK: 202
+INFO:08/03/2022 10:34:33: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:34:33: Comprobacion realizada con exito en: 0:00:00.112040
+INFO:08/03/2022 10:34:35: Numero de archivos OK: 202
+INFO:08/03/2022 10:34:35: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:34:35: Comprobacion realizada con exito en: 0:00:00.175581
+INFO:08/03/2022 10:34:37: Numero de archivos OK: 202
+INFO:08/03/2022 10:34:37: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:34:37: Comprobacion realizada con exito en: 0:00:00.177353
+INFO:08/03/2022 10:34:39: Numero de archivos OK: 202
+INFO:08/03/2022 10:34:39: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:34:39: Comprobacion realizada con exito en: 0:00:00.137398
+INFO:08/03/2022 10:34:42: Numero de archivos OK: 202
+INFO:08/03/2022 10:34:42: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:34:42: Comprobacion realizada con exito en: 0:00:00.153370
+INFO:08/03/2022 10:34:44: Numero de archivos OK: 202
+INFO:08/03/2022 10:34:44: Numero de archivos MODIFICADOS: 0
+INFO:08/03/2022 10:34:44: Comprobacion realizada con exito en: 0:00:00.137195
+INFO:08/03/2022 10:34:46: Numero de archivos OK: 202
+INFO:08/03/2022 10:34:46: Numero de archivos MODIFICADOS: 0
+CRITICAL:08/03/2022 10:34:50: EXAMEN INTERRUMPIDO
